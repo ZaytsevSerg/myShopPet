@@ -1,14 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from './components/Header/Header'
 import Categories from './components/Categories/Categories'
 import Sort from './components/Sort/Sort'
 import Card from './components/Card/Card'
 import './scss/app.scss'
-import db from './assets/db.json'
-
-console.log(db)
+import axios from 'axios'
 
 function App () {
+  const [items, setItems] = useState([])
+
+  // useEffect(() => {
+  //   fetch('https://635fc15dca0fe3c21aa3b607.mockapi.io/items')
+  //     .then((res) => res.json())
+  //     .then((arr) => {
+  //       setItems(arr)
+  //     })
+  // }, [])
+
+  useEffect(() => {
+    axios.get('https://635fc15dca0fe3c21aa3b607.mockapi.io/items')
+      .then((res) => setItems(res.data))
+      .catch((err) => console.log(err))
+  }, [])
+
   return (
      <div className="wrapper">
       <Header/>
@@ -20,16 +34,9 @@ function App () {
           </div>
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
-            {db.map(obj =>
-            <Card {...obj}/>)}
-                {/* <Card title ='Мексиканская' price='500'/>
-                <Card title ='Студенческая' price='456'/>
-                <Card title ='Домашняя' price='379'/>
-                <Card title ='Пепперони' price='432'/>
-                <Card title ='Диабло' price='765'/>
-                <Card title ='С ананасом' price='375'/>
-                <Card title ='Веган' price='543'/>
-                <Card title ='Мясная' price='832'/> */}
+            {items.map((obj) => (
+            <Card key={obj.id}{...obj}/>
+            ))}
           </div>
         </div>
       </div>
