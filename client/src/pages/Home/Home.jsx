@@ -22,9 +22,11 @@ const Home = () => {
       .then((res) => setItems(res.data))
       .catch((err) => console.log(err))
     setIsLoading(false)
+    window.scrollTo(0, 0)
   }, [])
   return (
-    <>
+    <div className="container">
+
      <div className="content__top">
             <Categories/>
               <Sort/>
@@ -36,7 +38,7 @@ const Home = () => {
               : items.map((obj) => <Card key={obj.id}{...obj}/>)
             }
           </div>
-    </>
+    </div>
   )
 }
 export default Home
