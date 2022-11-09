@@ -16,7 +16,6 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [categoryId, setCategoryId] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
-
   const [sortType, setSortType] = useState({
     name: 'популярности',
     sortProperty: 'reting'
