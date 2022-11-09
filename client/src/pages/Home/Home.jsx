@@ -1,6 +1,7 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import ReactPaginate from 'react-paginate'
+import { SearchContext } from '../../App'
 
 import Card from '../../components/Card/Card'
 import Skeleton from '../../components/Card/Skeleton'
@@ -8,7 +9,9 @@ import Categories from '../../components/Categories/Categories'
 import Pagination from '../../components/Pagination/Pagination'
 import Sort from '../../components/Sort/Sort'
 
-const Home = ({ searchValue }) => {
+const Home = () => {
+  const { searchValue } = useContext(SearchContext)
+
   const [items, setItems] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [categoryId, setCategoryId] = useState(0)
