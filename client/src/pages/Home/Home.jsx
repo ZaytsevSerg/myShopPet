@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState, useContext } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setCategoryId } from '../../redux/slice/filterSlice'
+import { setCategoryId, setCurrentPage } from '../../redux/slice/filterSlice'
 import ReactPaginate from 'react-paginate'
 import { SearchContext } from '../../App'
 import { setSort } from '../../redux/slice/sortSlice'
@@ -15,12 +15,13 @@ import Sort from '../../components/Sort/Sort'
 const Home = () => {
   const categoryId = useSelector((state) => state.filter.categoryId)
   const sortType = useSelector((state) => state.sorting.sort.sortProperty)
+  const { currentPage } = useSelector((state) => state.filter)
   const dispatch = useDispatch()
 
   const { searchValue } = useContext(SearchContext)
   const [items, setItems] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  const [currentPage, setCurrentPage] = useState(1)
+  // const [currentPage, setCurrentPage] = useState(1)
   
   // useEffect(() => {
   //   fetch('https://635fc15dca0fe3c21aa3b607.mockapi.io/items?category=' + categoryId)
@@ -32,6 +33,9 @@ const Home = () => {
 
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id))
+  }
+  const onChangePage = (number) => {
+    dispatch(setCurrentPage(number))
   }
 
   useEffect(() => {
@@ -66,7 +70,7 @@ const Home = () => {
               ? skeletons
               : pizzas }
           </div>
-          <Pagination onChangePage={(number) => setCurrentPage(number)}/>
+          <Pagination currentPage = {currentPage} onChangePage={onChangePage}/>
     </div>
   )
 }
