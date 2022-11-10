@@ -1,7 +1,10 @@
 import axios from 'axios'
 import React, { useEffect, useState, useContext } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { setCategoryId } from '../../redux/slice/filterSlice'
 import ReactPaginate from 'react-paginate'
 import { SearchContext } from '../../App'
+import { setSort } from '../../redux/slice/sortSlice'
 
 import Card from '../../components/Card/Card'
 import Skeleton from '../../components/Card/Skeleton'
@@ -10,16 +13,14 @@ import Pagination from '../../components/Pagination/Pagination'
 import Sort from '../../components/Sort/Sort'
 
 const Home = () => {
-  const { searchValue } = useContext(SearchContext)
+  const categoryId = useSelector((state) => state.filter.categoryId)
+  const sortType = useSelector((state) => state.sorting.sort.sortProperty)
+  const dispatch = useDispatch()
 
+  const { searchValue } = useContext(SearchContext)
   const [items, setItems] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  const [categoryId, setCategoryId] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
-  const [sortType, setSortType] = useState({
-    name: 'популярности',
-    sortProperty: 'reting'
-  })
   
   // useEffect(() => {
   //   fetch('https://635fc15dca0fe3c21aa3b607.mockapi.io/items?category=' + categoryId)
@@ -28,10 +29,15 @@ const Home = () => {
   //       setItems(arr)
   //     })
   // }, [categoryId])
+
+  const onChangeCategory = (id) => {
+    dispatch(setCategoryId(id))
+  }
+
   useEffect(() => {
     setIsLoading(true)
-    const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc'
-    const sortBy = sortType.sortProperty.replace('-', '')
+    const order = sortType.includes('-') ? 'asc' : 'desc'
+    const sortBy = sortType.replace('-', '')
     const category = categoryId > 0 ? `category=${categoryId}` : ''
     const search = searchValue ? `&search=${searchValue}` : ''
 
@@ -51,8 +57,8 @@ const Home = () => {
     <div className="container">
 
      <div className="content__top">
-              <Categories value = {categoryId} onChangeCategory={(index) => setCategoryId(index)}/>
-              <Sort value = {sortType} onChangeSort={(index) => setSortType(index)}/>
+              <Categories value = {categoryId} onChangeCategory={onChangeCategory}/>
+              <Sort />
           </div>
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
@@ -65,10 +71,3 @@ const Home = () => {
   )
 }
 export default Home
-
-// const pizzas = items.filter(obj => {
-//   if (obj.title.toLowerCase().includes(searchValue.toLowerCase())) {
-//     return true
-//   }  
-//   return false
-// }).map((obj) => <Card key={obj.id}{...obj}/>)

@@ -35,5 +35,6 @@ module.exports = {
     'no-nested-ternary': 0,
     'jsx-a11y/control-has-associated-label': 0,
     'no-unsafe-optional-chaining': 0
+    
   }
 }
