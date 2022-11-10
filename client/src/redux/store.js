@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import counterReducer from './slice/filterSlice'
+import filter from './slice/filterSlice'
+import sorting from './slice/sortSlice'
 
 export const store = configureStore({
-  reducer: { counter: counterReducer }
+  reducer: { filter, sorting }
 })
