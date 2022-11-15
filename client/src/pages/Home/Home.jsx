@@ -18,7 +18,7 @@ const Home = () => {
   const isSearch = useRef(false)
   const isMounted = useRef(false)
 
-  const { categoryId, sort, currentPage } = useSelector(state => state.filter)
+  const { categoryId, sort, currentPage } = useSelector((state) => state.filter)
 
   const { searchValue } = useContext(SearchContext)
   const [items, setItems] = useState([])
@@ -47,8 +47,19 @@ const Home = () => {
         setIsLoading(false)
       })
   }
-  // , [categoryId, sort.sortProperty, searchValue, currentPage])
-
+  
+  useEffect(() => {
+    if (isMounted.current) {
+      const queryString = qs.stringify({
+        sortProperty: sort.sortProperty,
+        categoryId,
+        currentPage
+      })
+      navigate(`?${queryString}`)
+    }
+    isMounted.current = true
+  }, [categoryId, sort.sortProperty, currentPage])
+  
   useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1))
@@ -64,29 +75,19 @@ const Home = () => {
       isSearch.current = true
     }
   }, [])
-
+  
   useEffect(() => {
     window.scrollTo(0, 0)
-
+    
     if (!isSearch.current) {
       fetchPizzas()
     }
     isSearch.current = false
   }, [categoryId, sort.sortProperty, searchValue, currentPage]
   )
-
-  useEffect(() => {
-    const queryString = qs.stringify({
-      sortProperty: sort.sortProperty,
-      categoryId,
-      currentPage
-    })
-    navigate(`?${queryString}`)
-  }, [categoryId, sort.sortProperty, searchValue, currentPage])
-
   const pizzas = items.map((obj) => <Card key={obj.id}{...obj}/>)
   const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index}/>)
-
+  
   return (
     <div className="container">
 
