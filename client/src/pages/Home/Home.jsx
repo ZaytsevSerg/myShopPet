@@ -2,8 +2,8 @@ import React, { useEffect, useState, useContext, useRef } from 'react'
 import qs from 'qs'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { setCategoryId, setCurrentPage, setFilters } from '../../redux/slice/filterSlice'
-import { fetchPizzas } from '../../redux/slice/pizzasSlice'
+import { selectFilter, setCategoryId, setCurrentPage, setFilters } from '../../redux/slice/filterSlice'
+import { fetchPizzas, selectPizzaData } from '../../redux/slice/pizzasSlice'
 import { SearchContext } from '../../App'
 
 import Card from '../../components/Card/Card'
@@ -18,9 +18,8 @@ const Home = () => {
   const isSearch = useRef(false)
   const isMounted = useRef(false)
 
-  const { items, status } = useSelector((state) => state.pizza)
-  const { categoryId, sort, currentPage } = useSelector((state) => state.filter)
-  const { searchValue } = useContext(SearchContext)
+  const { items, status } = useSelector(selectPizzaData)
+  const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilter)
 
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id))
