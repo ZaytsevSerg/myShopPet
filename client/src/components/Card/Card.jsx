@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addItem } from '../../redux/slice/CartSlice'
+import { addItem, selectCart, selectCartItemById } from '../../redux/slice/CartSlice'
 const typeNames = ['тонкое', 'традиционное']
 
 export default function Card ({ id, title, price, imageUrl, sizes, types }) {
   const dispatch = useDispatch()
-  const cartItem = useSelector((state) => state.cart.items.find((obj) => obj.id === id))
+  const cartItem = useSelector(selectCartItemById(id))
   const [activType, setActivType] = useState(0)
   const [activSizes, setActivSizes] = useState(0)
 
