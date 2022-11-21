@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { selectFilter, setCategoryId, setCurrentPage, setFilters } from '../../redux/slice/filterSlice'
 import { fetchPizzas, selectPizzaData } from '../../redux/slice/pizzasSlice'
-import { SearchContext } from '../../App'
 
 import Card from '../../components/Card/Card'
 import Skeleton from '../../components/Card/Skeleton'
