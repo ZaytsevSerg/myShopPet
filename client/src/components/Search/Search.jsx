@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useRef, useCallback, useState } from 'react'
-import { SearchContext } from '../../App'
 import debounce from 'lodash.debounce'
 import styles from './Search.module.scss'
 import { useDispatch } from 'react-redux'
