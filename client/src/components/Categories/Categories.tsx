@@ -3,10 +3,8 @@ import React, { useState } from 'react'
 
 type CategoriesProps = {
   value: number;
-  onChangeCategory: any;
+  onChangeCategory: (idx: number) => void;
 }
-
-const Categories: React.FC<CategoriesProps> = ( { value, onChangeCategory }) =>{
 
   const categories = [
     'Все',
@@ -16,6 +14,7 @@ const Categories: React.FC<CategoriesProps> = ( { value, onChangeCategory }) =>{
     'Острые',
     'Закрытые'
   ]
+const Categories: React.FC<CategoriesProps> = ( { value, onChangeCategory }) =>{
 
   return (
       <div className="categories">
