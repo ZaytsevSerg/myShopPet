@@ -2,7 +2,7 @@ import { type } from '@testing-library/user-event/dist/type'
 // import { remove, size } from 'lodash'
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { addItem, minusItem, removeItem } from '../../redux/slice/CartSlice'
+import { addItem, CartItem, minusItem, removeItem } from '../../redux/slice/CartSlice'
 
 type CartItemProps = {
 id: string;
@@ -14,14 +14,14 @@ count: number;
 imageUrl: string;
 }
 
-const CartItem: React.FC<CartItemProps> = ({ id, title, type, size, price, count, imageUrl }) => {
+const CartItemBlock: React.FC<CartItemProps> = ({ id, title, type, size, price, count, imageUrl }) => {
   const dispatch = useDispatch()
 
   const onClickPlus = () => {
     dispatch(
       addItem({
         id
-      })
+      } as CartItem)
     )
   }
 
@@ -82,4 +82,4 @@ alt="Pizza"
 </div>
   )
 }
-export default CartItem
+export default CartItemBlock
