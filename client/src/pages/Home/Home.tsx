@@ -1,9 +1,12 @@
 import React, { useEffect, useState, useContext, useRef, useCallback } from 'react'
-import qs from 'qs'
 import { useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-import { FilterSliceState, selectFilter, setCategoryId, setCurrentPage, setFilters } from '../../redux/slice/filterSlice'
-import { fetchPizzas, SearchPizzaParams, selectPizzaData } from '../../redux/slice/pizzasSlice'
+import { useNavigate } from 'react-router-dom'
+import {selectFilter} from '../../redux/filter/selectors'
+import {setCategoryId} from '../../redux/filter/slice'
+import {setCurrentPage} from '../../redux/filter/slice'
+
+import { selectPizzaData } from '../../redux/pizza/selector'
+import { fetchPizzas } from '../../redux/pizza/asyncActions'
 
 import Card from '../../components/Card/Card'
 import Skeleton from '../../components/Card/Skeleton'

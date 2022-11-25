@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { addItem, CartItem, selectCart, selectCartItemById } from '../../redux/slice/CartSlice'
+import { addItem   } from '../../redux/cart/slice'
+import {CartItem} from '../../redux/cart/types'
+import { selectCart, selectCartItemById} from '../../redux/cart/selectors'
 const typeNames = ['тонкое', 'традиционное']
 
 type CardProps = {
@@ -15,7 +17,7 @@ type CardProps = {
 }
 
 
-const Card: React.FC<CardProps> = ({ id, title, price, imageUrl, sizes, types }) =>{
+export const Card: React.FC<CardProps> = ({ id, title, price, imageUrl, sizes, types }) =>{
 
 
   const dispatch = useDispatch()
