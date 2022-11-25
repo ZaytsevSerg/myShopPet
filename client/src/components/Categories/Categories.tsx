@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-
+import React, { memo, useMemo, useState } from 'react'
+import {useWhyDidYouUpdate} from 'ahooks'
 
 type CategoriesProps = {
   value: number;
@@ -14,7 +14,7 @@ type CategoriesProps = {
     'Острые',
     'Закрытые'
   ]
-const Categories: React.FC<CategoriesProps> = ( { value, onChangeCategory }) =>{
+export const Categories: React.FC<CategoriesProps> = memo(({ value, onChangeCategory }) => {
 
   return (
       <div className="categories">
@@ -29,6 +29,6 @@ const Categories: React.FC<CategoriesProps> = ( { value, onChangeCategory }) =>{
       </ul>
     </div>
   )
-}
+})
 
 export default Categories
