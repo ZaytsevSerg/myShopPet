@@ -3,8 +3,11 @@ import { type } from '@testing-library/user-event/dist/type'
 import clsx from 'clsx'
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { addItem, CartItem, minusItem, removeItem } from '../../redux/slice/CartSlice'
 
+import {addItem} from '../../redux/cart/slice'
+import {CartItem} from '../../redux/cart/types'
+import {minusItem} from '../../redux/cart/slice'
+import {removeItem} from '../../redux/cart/slice'
 type CartItemProps = {
 id: string;
 title: string;
