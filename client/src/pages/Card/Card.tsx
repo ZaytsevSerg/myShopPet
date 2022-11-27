@@ -17,7 +17,7 @@ type CardProps = {
 }
 
 
-export const Card: React.FC<CardProps> = ({ id, title, price, imageUrl, sizes, types }) =>{
+const Card: React.FC<CardProps> = ({ id, title, price, imageUrl, sizes, types }) =>{
 
 
   const dispatch = useDispatch()
